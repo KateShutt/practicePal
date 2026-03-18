@@ -11,9 +11,53 @@ import "./styles/global.css";
 import Modal from "react-modal";
 import InstrumentRequiredRoute from "./components/InstrumentRequiredRoute";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 Modal.setAppElement("#root");
 
 function App() {
+  const [backendStatus, setBackendStatus] = useState("checking");
+  //"checking" / "ready" / "error"
+
+  useEffect(() => {
+    async function wakeBackend() {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/health`,
+        );
+
+        if (res.status !== 200) {
+          throw new Error("Health check failed");
+        }
+        setBackendStatus("ready");
+      } catch (error) {
+        console.error("Backend wake failed", error);
+        setBackendStatus("error");
+      }
+    }
+
+    wakeBackend();
+  }, []);
+
+  if (backendStatus === "checking") {
+    return (
+      <div>
+        <h2>Waking backend...</h2>
+        <p>The server may take a little while to start on first load.</p>
+      </div>
+    );
+  }
+
+  if (backendStatus === "error") {
+    return (
+      <div>
+        <h2>Backend unavailable</h2>
+        <p>Please wait a moment and refresh.</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <Navbar />
