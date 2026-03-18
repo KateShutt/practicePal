@@ -15,6 +15,8 @@ function AddInstrument() {
 
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [alreadyPlayed, setAlreadyPlayed] = useState([]);
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -45,11 +47,13 @@ function AddInstrument() {
         "http://localhost:5000/api/instruments",
       );
 
-      const alreadyPlayed = await fetchUserInstruments(token);
+      const userInstrumentData = await fetchUserInstruments(token);
 
-      console.log("already played", alreadyPlayed);
+      console.log("already played", userInstrumentData.userInstruments);
 
-      const alreadyPlayedIds = alreadyPlayed.userInstruments.map(
+      setAlreadyPlayed(userInstrumentData.userInstruments);
+
+      const alreadyPlayedIds = userInstrumentData.userInstruments.map(
         (instrument) => instrument.instrument_id,
       );
 
@@ -99,7 +103,13 @@ function AddInstrument() {
 
   return (
     <div>
-      Add an Instrument
+      <h1>Add an Instrument</h1>
+      <p>You are already registered to play....</p>
+      <ul>
+        {alreadyPlayed.map((instrument) => (
+          <li key={instrument.id}>{instrument.name}</li>
+        ))}
+      </ul>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Add an instrument to your list</label>
