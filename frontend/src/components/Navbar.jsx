@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { userHasInstruments } from "../services/instrumentFunctions";
 import { useEffect, useState } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const token = localStorage.getItem("token");
 
@@ -27,7 +28,7 @@ function Navbar() {
     }
 
     checkInstruments();
-  }, [token]);
+  }, [token, location.pathname]);
 
   function handleLogout() {
     localStorage.removeItem("token");
