@@ -133,7 +133,7 @@ function AddEntryPage() {
         </div>
 
         <div>
-          <label className="required">Practice duration</label>
+          <label className="required">Practice duration in minutes</label>
 
           <input
             name="duration_minutes"

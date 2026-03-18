@@ -122,7 +122,7 @@ function DashboardPage() {
   if (!hasInstrument) {
     return (
       <div>
-        <h2>Welcome to practicePal. Please enter an instrument to proceed</h2>
+        <h2>Welcome to PracticePal. Please enter an instrument to proceed</h2>
         <button onClick={() => navigate("/addInstrument")}>
           Add an instrument
         </button>
