@@ -24,7 +24,7 @@ function AddInstrument() {
     console.log("token", token);
     try {
       await axios.post(
-        "http://localhost:5000/api/addInstrument",
+        `${import.meta.env.VITE_API_URL}/api/addInstrument`,
         { instrument_id: selectedInstrument },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -44,7 +44,7 @@ function AddInstrument() {
   async function fetchInstruments() {
     try {
       const allInstruments = await axios.get(
-        "http://localhost:5000/api/instruments",
+        `${import.meta.env.VITE_API_URL}/api/instruments`,
       );
 
       const userInstrumentData = await fetchUserInstruments(token);

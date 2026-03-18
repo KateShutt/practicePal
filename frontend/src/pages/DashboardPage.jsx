@@ -41,27 +41,27 @@ function DashboardPage() {
         setHasInstrument(result);
         if (result) {
           const profileRes = await axios.get(
-            "http://localhost:5000/api/users/profile",
+            `${import.meta.env.VITE_API_URL}/api/users/profile`,
             { headers: { Authorization: `Bearer ${token}` } },
           );
 
           const entriesRes = await axios.get(
-            "http://localhost:5000/api/practice-entries",
+            `${import.meta.env.VITE_API_URL}/api/practice-entries`,
             { headers: { Authorization: `Bearer ${token}` } },
           );
 
           const weeklyTotalRes = await axios.get(
-            "http://localhost:5000/api/practice-entries/summary/week",
+            `${import.meta.env.VITE_API_URL}/api/practice-entries/summary/week`,
             { headers: { Authorization: `Bearer ${token}` } },
           );
 
           const dailyTotalRes = await axios.get(
-            "http://localhost:5000/api/practice-entries/summary/daily",
+            `${import.meta.env.VITE_API_URL}/api/practice-entries/summary/daily`,
             { headers: { Authorization: `Bearer ${token}` } },
           );
 
           const weeklyPerInstrumentRes = await axios.get(
-            "http://localhost:5000/api/practice-entries/summary/perInstrument",
+            `${import.meta.env.VITE_API_URL}/api/practice-entries/summary/perInstrument`,
             { headers: { Authorization: `Bearer ${token}` } },
           );
 

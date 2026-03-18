@@ -35,7 +35,7 @@ function AddEntryPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/practice-entries",
+        `${import.meta.env.VITE_API_URL}/api/practice-entries`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -92,7 +92,7 @@ function AddEntryPage() {
     async function getInstruments() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/userInstruments",
+          `${import.meta.env.VITE_API_URL}/api/userInstruments`,
           { headers: { Authorization: `Bearer ${token}` } },
         );
 

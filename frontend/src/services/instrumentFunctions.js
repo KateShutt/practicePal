@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function fetchUserInstruments(token) {
   const response = await axios.get(
-    "http://localhost:5000/api/userInstruments",
+    `${import.meta.env.VITE_API_URL}/api/userInstruments`,
     { headers: { Authorization: `Bearer ${token}` } },
   );
 
