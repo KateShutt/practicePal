@@ -10,7 +10,7 @@ This project demonstrates a complete production-ready setup with a deployed fron
 
 ## 🌍 Live Demo
 
-Frontend: https://practice-pal-sooty.vercel.app
+Frontend: https://practice-pal-sooty.vercel.app <br>
 Backend API: https://practicepal-85r6.onrender.com/api/health
 
 ## 🛠️ Tech Stack
@@ -43,8 +43,11 @@ Backend API: https://practicepal-85r6.onrender.com/api/health
 - Protected routes for authenticated users
 - Add and manage instruments
 - Log practice sessions with:
+  - date
   - duration
   - category
+  - instrument
+  - piece title
   - notes
 - Relational database structure with foreign keys
 - Full CRUD functionality for practice entries
