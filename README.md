@@ -4,7 +4,7 @@
 
 PracticePal is a full-stack web application that helps musicians track their practice sessions, manage instruments, and monitor progress over time.
 
-The app allows users to register, log in securely, add instruments, and log structured practice entries including duration, category, and notes.
+The app allows users to register, log in securely, add instruments, and log structured practice entries including duration, category, and date.
 
 This project demonstrates a complete production-ready setup with a deployed frontend, backend API, and cloud-hosted database.
 
