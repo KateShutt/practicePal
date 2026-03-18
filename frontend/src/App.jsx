@@ -31,7 +31,6 @@ function App() {
           throw new Error("Health check failed");
         }
 
-        await new Promise((resolve) => setTimeout(resolve, 2000));
         setBackendStatus("ready");
       } catch (error) {
         console.error("Backend wake failed", error);
