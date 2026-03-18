@@ -105,6 +105,16 @@ function DashboardPage() {
     loadDashboard();
   }, [token]);
 
+  function formatMinutes(totalMinutes) {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    if (hours === 0) return `${minutes} min`;
+    if (minutes === 0) return `${hours} hr`;
+
+    return `${hours}h ${minutes}m`;
+  }
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -167,7 +177,7 @@ function DashboardPage() {
             <StatsFlipCard frontTitle="Weekly total" backTitle="Weekly total">
               <h2>
                 {hasPracticedThisWeek
-                  ? weeklyTotal
+                  ? formatMinutes(weeklyTotal)
                   : "You have not practiced this week 😢"}
               </h2>
             </StatsFlipCard>
@@ -182,7 +192,8 @@ function DashboardPage() {
                 <ul className="list-unstyled">
                   {dailyTotal.map((day) => (
                     <li key={day.practice_date}>
-                      {day.practice_date.split("T")[0]} - {day.daily_total} min
+                      {day.practice_date.split("T")[0]} -{" "}
+                      {formatMinutes(day.daily_total)}
                     </li>
                   ))}
                 </ul>
@@ -201,7 +212,8 @@ function DashboardPage() {
                 <ul className="list-unstyled">
                   {weeklyPerInstrument.map((instrument) => (
                     <li key={instrument.name}>
-                      {instrument.name} {instrument.instrument_weekly_total}
+                      {instrument.name}{" "}
+                      {formatMinutes(instrument.instrument_weekly_total)}
                     </li>
                   ))}
                 </ul>
