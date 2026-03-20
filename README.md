@@ -98,7 +98,6 @@ npm run dev
 
 - Backend may take time to wake up due to free hosting (Render cold starts)
 - No password reset functionality yet
-- Shared database for all users (no multi-tenant separation)
 
 ## 📈 Future Improvements
 
