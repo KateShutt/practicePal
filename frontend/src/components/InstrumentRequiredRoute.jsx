@@ -26,9 +26,11 @@ function InstrumentRequiredRoute({ children }) {
 
   if (loading) {
     return (
-      <div>
-        <h1>Loading....</h1>
-      </div>
+      <main className="page-shell">
+        <section className="page-card">
+          <h1>Loading....</h1>
+        </section>
+      </main>
     );
   }
 
