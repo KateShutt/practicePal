@@ -137,12 +137,17 @@ function AddInstrument() {
       <section className="page-card">
         <div>
           <h1>Add an Instrument</h1>
-          <p>You are already registered to play....</p>
-          <ul>
-            {alreadyPlayed.map((instrument) => (
-              <li key={instrument.id}>{instrument.name}</li>
-            ))}
-          </ul>
+          {alreadyPlayed.length > 0 && (
+            <>
+              <p>You are already registered to play....</p>
+              <ul>
+                {alreadyPlayed.map((instrument) => (
+                  <li key={instrument.id}>{instrument.name}</li>
+                ))}
+              </ul>
+            </>
+          )}
+
           <form onSubmit={handleSubmit}>
             <div>
               <label>Add an instrument to your list</label>
