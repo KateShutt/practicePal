@@ -59,59 +59,63 @@ function RegisterPage() {
   }
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
+    <main className="page-shell">
+      <section className="page-card">
         <div>
-          <label>Username</label>
-          <input
-            name="username"
-            type="text"
-            placeholder="Enter a username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          ></input>
+          <h1>Register</h1>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Username</label>
+              <input
+                name="username"
+                type="text"
+                placeholder="Enter a username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              ></input>
+            </div>
+
+            <div>
+              <label>Password</label>
+              <input
+                name="password"
+                type={passwordVisibility ? "text" : "password"}
+                placeholder="Enter a password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              ></input>
+
+              <button type="button" onClick={togglePassword}>
+                {passwordVisibility ? "Hide password" : "Show password"}
+              </button>
+
+              <p>Password must contain:</p>
+              <ul>
+                <li>At least 10 characters</li>
+                <li>One uppercase letter</li>
+                <li>One number</li>
+              </ul>
+            </div>
+
+            <div>
+              <label>Confirm password</label>
+              <input
+                name="confirmPassword"
+                type={passwordVisibility ? "text" : "password"}
+                placeholder="re-enter password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              ></input>
+            </div>
+
+            <button type="submit">Register</button>
+          </form>
         </div>
-
-        <div>
-          <label>Password</label>
-          <input
-            name="password"
-            type={passwordVisibility ? "text" : "password"}
-            placeholder="Enter a password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          ></input>
-
-          <button type="button" onClick={togglePassword}>
-            {passwordVisibility ? "Hide password" : "Show password"}
-          </button>
-
-          <p>Password must contain:</p>
-          <ul>
-            <li>At least 10 characters</li>
-            <li>One uppercase letter</li>
-            <li>One number</li>
-          </ul>
-        </div>
-
-        <div>
-          <label>Confirm password</label>
-          <input
-            name="confirmPassword"
-            type={passwordVisibility ? "text" : "password"}
-            placeholder="re-enter password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          ></input>
-        </div>
-
-        <button type="submit">Register</button>
-      </form>
-    </div>
+      </section>
+    </main>
   );
 }
 
