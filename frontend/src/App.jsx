@@ -43,19 +43,23 @@ function App() {
 
   if (backendStatus === "checking") {
     return (
-      <div>
-        <h2>Waking backend...</h2>
-        <p>The server may take a little while to start on first load.</p>
-      </div>
+      <main className="page-shell">
+        <section className="page-card">
+          <h2>Waking backend...</h2>
+          <p>The server may take a little while to start on first load.</p>
+        </section>
+      </main>
     );
   }
 
   if (backendStatus === "error") {
     return (
-      <div>
-        <h2>Backend unavailable</h2>
-        <p>Please wait a moment and refresh.</p>
-      </div>
+      <main className="page-shell">
+        <section className="page-card">
+          <h2>Backend unavailable</h2>
+          <p>Please wait a moment and refresh.</p>
+        </section>
+      </main>
     );
   }
 
