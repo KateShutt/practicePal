@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 
+import { handleAuthError } from "../utils/handleAuthError";
+
 function AddEntryPage() {
   const navigate = useNavigate();
 
@@ -27,8 +29,8 @@ function AddEntryPage() {
     e.preventDefault();
 
     if (formData.piece_title.length > 50) {
-      console.log("piece title cannot be longer than 100 characters");
-      setErrorMessage("piece name cannot be longer than 100 characters");
+      console.log("piece title cannot be longer than 50 characters");
+      setErrorMessage("piece title cannot be longer than 50 characters");
       return;
     }
     console.log(formData);
@@ -43,8 +45,11 @@ function AddEntryPage() {
       );
       setModalOpen(true);
     } catch (error) {
+      if (handleAuthError(error, navigate)) return; // if user is not authenticated redirect to login
       console.error(error);
-      setErrorMessage(error.response?.data?.message);
+      setErrorMessage(
+        error.response?.data?.error || "Something went wrong, please try again",
+      );
     }
   }
 
@@ -76,8 +81,11 @@ function AddEntryPage() {
         return;
       } else if (!Number.isInteger(numberValue)) {
         setErrorMessage("practice duration must be a whole number");
+        return;
       }
     }
+
+    setErrorMessage("");
 
     setFormData({
       ...formData,
@@ -107,11 +115,16 @@ function AddEntryPage() {
 
         console.log("response data", response.data?.userInstruments);
       } catch (error) {
-        console.error(error.response?.data);
+        if (handleAuthError(error, navigate)) return; // if user is not authenticated redirect to login
+
+        setErrorMessage(
+          error.response?.data?.error ||
+            "Something went wrong, please try again",
+        );
       }
     }
     getInstruments();
-  }, []);
+  }, [navigate, token]);
 
   return (
     <main className="page-shell">
