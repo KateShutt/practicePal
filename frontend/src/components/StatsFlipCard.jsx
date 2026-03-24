@@ -7,7 +7,7 @@ function StatsFlipCard({ frontTitle, backTitle, children }) {
       <div className="flip-card-inner">
         {/* front */}
         <div className="flip-card-front">
-          <Card className="h-100 shadow text-center">
+          <Card className="h-100 shadow text-center stats-card stats-card-front">
             <Card.Body className="d-flex flex-column justify-content-center">
               <CardTitle>{frontTitle}</CardTitle>
               <p>Hover to view stats</p>
@@ -18,7 +18,7 @@ function StatsFlipCard({ frontTitle, backTitle, children }) {
         {/* back */}
 
         <div className="flip-card-back">
-          <Card className="h-100 shadow text-center bg-dark text-white">
+          <Card className="h-100 shadow text-center stats-card stats-card-back">
             <Card.Body className="d-flex flex-column justify-content-center">
               <CardTitle>{backTitle}</CardTitle>
               {children}
