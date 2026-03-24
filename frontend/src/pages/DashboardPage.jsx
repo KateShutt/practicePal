@@ -169,22 +169,28 @@ function DashboardPage() {
 
         <Container className="my-4">
           <Row className="g-4">
-            <Col md={6}>
+            <Col xs={12} md={6}>
               <StatsFlipCard
-                frontTitle="Your instruments"
-                backTitle="You are registered to play"
+                frontTitle="Top instrument this week"
+                backTitle="Most practiced"
               >
-                <ul>
-                  {userInstruments.map((instrument) => (
-                    <li className="no-bullets" key={instrument.instrument_id}>
-                      {instrument.name}
-                    </li>
-                  ))}
-                </ul>
+                {weeklyPerInstrument.length > 0 ? (
+                  <>
+                    <h2>{weeklyPerInstrument[0].name}</h2>
+                    <p>
+                      {formatMinutes(
+                        weeklyPerInstrument[0].instrument_weekly_total,
+                      )}{" "}
+                      total practice 👏
+                    </p>
+                  </>
+                ) : (
+                  "You have not practiced this week 😢"
+                )}
               </StatsFlipCard>
             </Col>
 
-            <Col md={6}>
+            <Col xs={12} md={6}>
               <StatsFlipCard frontTitle="Weekly total" backTitle="Weekly total">
                 <h2>
                   {hasPracticedThisWeek
@@ -194,7 +200,7 @@ function DashboardPage() {
               </StatsFlipCard>
             </Col>
 
-            <Col md={6}>
+            <Col xs={12} md={6}>
               <StatsFlipCard
                 frontTitle="Practice per day this week"
                 backTitle="Last 7 days"
@@ -214,7 +220,7 @@ function DashboardPage() {
               </StatsFlipCard>
             </Col>
 
-            <Col md={6}>
+            <Col xs={12} md={6}>
               <StatsFlipCard
                 frontTitle="Practice by instrument this week"
                 backTitle="Practice by instrument"

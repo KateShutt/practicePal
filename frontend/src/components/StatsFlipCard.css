@@ -1,13 +1,15 @@
 .flip-card {
   width: 300px;
-  height: 220px;
+  min-height: 220px;
   perspective: 1000px;
+  margin: 0 auto;
 }
 
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: 220px;
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
@@ -22,7 +24,13 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  min-height: 220px;
   backface-visibility: hidden;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-wrap: break-word;
 }
 
 .flip-card-back {
@@ -43,4 +51,27 @@
 .stats-card-back {
   background-color: #efe7d8;
   color: #3e3a34;
+}
+
+@media (max-width: 768px) {
+  .flip-card {
+    width: 100%;
+    max-width: 300px;
+  }
+  .flip-card:hover .flip-card-inner {
+    transform: none;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: relative;
+    height: auto;
+    min-height: auto;
+    transform: none;
+  }
+
+  .flip-card-back {
+    display: block;
+    margin-top: 0.5rem;
+  }
 }

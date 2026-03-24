@@ -160,7 +160,7 @@ router.get("/summary/perInstrument", authMiddleware, async (req, res) => {
 
   try {
     const [rows] = await pool.query(
-      "SELECT SUM(duration_minutes) as instrument_weekly_total, name FROM practice_entries JOIN instruments ON practice_entries.instrument_id = instruments.id WHERE user_id = ? AND practice_date >= CURDATE() - INTERVAL 7 DAY GROUP BY name",
+      "SELECT SUM(duration_minutes) as instrument_weekly_total, name FROM practice_entries JOIN instruments ON practice_entries.instrument_id = instruments.id WHERE user_id = ? AND practice_date >= CURDATE() - INTERVAL 7 DAY GROUP BY name ORDER BY instrument_weekly_total DESC",
       [userId],
     );
 
