@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+
 import { userHasInstruments } from "../services/instrumentFunctions";
 import { useEffect, useState } from "react";
 
@@ -42,49 +42,69 @@ function Navbar() {
       small screens navbar dark = light text on dark background
       bg-dark = dark background*/}
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand fw-bold" to="/">
           {/*navbar-brand is the logo / identity of site. Takes you to homepage*/}
           PracticePal
         </Link>
 
-        <div className="navbar-nav ms-auto">
-          {/*navbar-nav* makes these the navigation menu
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNavbar"
+          aria-controls="mainNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="mainNavbar">
+          <div className="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+            {/*navbar-nav* makes these the navigation menu
           ms-auto pushes them to the right*/}
-          {!token && (
-            <Link className="nav-link" to="/login">
-              Login
-            </Link>
-          )}
+            {!token && (
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            )}
 
-          {!token && (
-            <Link className="nav-link" to="/register">
-              Register
-            </Link>
-          )}
+            {!token && (
+              <Link className="nav-link" to="/register">
+                Register
+              </Link>
+            )}
 
-          {token && (
-            <Link className="nav-link" to="/dashboard">
-              Dashboard
-            </Link>
-          )}
+            {token && (
+              <Link className="nav-link" to="/dashboard">
+                Dashboard
+              </Link>
+            )}
 
-          {token && hasInstrument && (
-            <Link className="nav-link" to="/addEntry">
-              Add Practice
-            </Link>
-          )}
+            {token && hasInstrument && (
+              <Link className="nav-link" to="/addEntry">
+                Add Practice
+              </Link>
+            )}
 
-          {token && (
-            <Link className="nav-link" to="/addInstrument">
-              Add Instrument
-            </Link>
-          )}
+            {token && (
+              <Link className="nav-link" to="/addInstrument">
+                Add Instrument
+              </Link>
+            )}
 
-          {token && (
-            <button className="nav-link btn btn-link" onClick={handleLogout}>
-              Logout
-            </button>
-          )}
+            {token && (
+              <div className="nav-item">
+                <button
+                  className="nav-link btn btn-link w-100 text-start"
+                  onClick={handleLogout}
+                  type="button"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>
