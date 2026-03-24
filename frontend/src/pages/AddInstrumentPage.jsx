@@ -17,6 +17,9 @@ function AddInstrument() {
 
   const [alreadyPlayed, setAlreadyPlayed] = useState([]);
 
+  const [fetchStatus, setFetchStatus] = useState("checking");
+  // checking / ready / error
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -66,8 +69,11 @@ function AddInstrument() {
       if (instrumentsToDisplay.length > 0) {
         setSelectedInstrument(instrumentsToDisplay[0].id); // set selectedInstrument to be the first of this list
       }
+
+      setFetchStatus("ready");
     } catch (error) {
       console.log(error);
+      setFetchStatus("error");
     }
   }
 
@@ -76,6 +82,7 @@ function AddInstrument() {
   }, []);
 
   function addAnotherInstrument() {
+    setFetchStatus("checking");
     fetchInstruments();
     setModalOpen(false);
   }
@@ -88,6 +95,26 @@ function AddInstrument() {
   function returnToDashboard() {
     navigate("/dashboard");
     setModalOpen(false);
+  }
+
+  if (fetchStatus === "checking") {
+    return (
+      <main className="page-shell">
+        <section className="page-card">
+          <h2>Loading...</h2>
+        </section>
+      </main>
+    );
+  }
+
+  if (fetchStatus === "error") {
+    return (
+      <main className="page-shell">
+        <section className="page-card">
+          <h2>Server error</h2>
+        </section>
+      </main>
+    );
   }
 
   if (instruments.length === 0) {
