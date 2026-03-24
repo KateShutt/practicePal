@@ -168,70 +168,83 @@ function DashboardPage() {
         {profile && <p>Welcome {profile.username}</p>}
 
         <Container className="my-4">
-          <Row className="g-4">
-            <Col md={6}>
+          <Row className="g-1 g-md-4">
+            <Col xs={12} md={6}>
               <StatsFlipCard
-                frontTitle="Your instruments"
-                backTitle="You are registered to play"
-              >
-                <ul>
-                  {userInstruments.map((instrument) => (
-                    <li className="no-bullets" key={instrument.instrument_id}>
-                      {instrument.name}
-                    </li>
-                  ))}
-                </ul>
-              </StatsFlipCard>
+                frontTitle="Top instrument this week"
+                backTitle="Most practiced"
+                backContent={
+                  weeklyPerInstrument.length > 0 ? (
+                    <>
+                      <h2>{weeklyPerInstrument[0].name}</h2>
+                      <p>
+                        {formatMinutes(
+                          weeklyPerInstrument[0].instrument_weekly_total,
+                        )}{" "}
+                        total practice 👏
+                      </p>
+                    </>
+                  ) : (
+                    "You have not practiced this week 😢"
+                  )
+                }
+              ></StatsFlipCard>
             </Col>
 
-            <Col md={6}>
-              <StatsFlipCard frontTitle="Weekly total" backTitle="Weekly total">
-                <h2>
-                  {hasPracticedThisWeek
-                    ? formatMinutes(weeklyTotal)
-                    : "You have not practiced this week 😢"}
-                </h2>
-              </StatsFlipCard>
+            <Col xs={12} md={6}>
+              <StatsFlipCard
+                frontTitle="Total practice on all instruments"
+                backTitle="Total practice"
+                backContent={
+                  <h2>
+                    {hasPracticedThisWeek
+                      ? formatMinutes(weeklyTotal) + "👏"
+                      : "You have not practiced this week 😢"}
+                  </h2>
+                }
+              ></StatsFlipCard>
             </Col>
 
-            <Col md={6}>
+            <Col xs={12} md={6}>
               <StatsFlipCard
                 frontTitle="Practice per day this week"
                 backTitle="Last 7 days"
-              >
-                {hasPracticedThisWeek ? (
-                  <ul className="list-unstyled">
-                    {dailyTotal.map((day) => (
-                      <li key={day.practice_date}>
-                        {day.practice_date.split("T")[0]} -{" "}
-                        {formatMinutes(day.daily_total)}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  "You have not practiced this week 😢"
-                )}
-              </StatsFlipCard>
+                backContent={
+                  hasPracticedThisWeek ? (
+                    <ul className="list-unstyled">
+                      {dailyTotal.map((day) => (
+                        <li key={day.practice_date}>
+                          {day.practice_date.split("T")[0]} -{" "}
+                          {formatMinutes(day.daily_total)}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    "You have not practiced this week 😢"
+                  )
+                }
+              ></StatsFlipCard>
             </Col>
 
-            <Col md={6}>
+            <Col xs={12} md={6}>
               <StatsFlipCard
                 frontTitle="Practice by instrument this week"
                 backTitle="Practice by instrument"
-              >
-                {hasPracticedThisWeek ? (
-                  <ul className="list-unstyled">
-                    {weeklyPerInstrument.map((instrument) => (
-                      <li key={instrument.name}>
-                        {instrument.name}{" "}
-                        {formatMinutes(instrument.instrument_weekly_total)}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  "You have not practiced this week 😢"
-                )}
-              </StatsFlipCard>
+                backContent={
+                  hasPracticedThisWeek ? (
+                    <ul className="list-unstyled">
+                      {weeklyPerInstrument.map((instrument) => (
+                        <li key={instrument.name}>
+                          {instrument.name}{" "}
+                          {formatMinutes(instrument.instrument_weekly_total)}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    "You have not practiced this week 😢"
+                  )
+                }
+              ></StatsFlipCard>
             </Col>
           </Row>
         </Container>
