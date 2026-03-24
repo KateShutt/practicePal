@@ -7,6 +7,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import StatsFlipCard from "../components/StatsFlipCard";
 import { Container, Row, Col } from "react-bootstrap";
+import { handleAuthError } from "../utils/handleAuthError";
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -96,6 +97,7 @@ function DashboardPage() {
           setUserInstruments(instrumentArray);
         }
       } catch (error) {
+        if (handleAuthError(error, navigate)) return;
         console.error(error);
       } finally {
         setLoading(false);
@@ -103,7 +105,7 @@ function DashboardPage() {
     }
 
     loadDashboard();
-  }, [token]);
+  }, [token, navigate]);
 
   function formatMinutes(totalMinutes) {
     const hours = Math.floor(totalMinutes / 60);
