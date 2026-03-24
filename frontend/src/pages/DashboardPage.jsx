@@ -168,7 +168,7 @@ function DashboardPage() {
         {profile && <p>Welcome {profile.username}</p>}
 
         <Container className="my-4">
-          <Row className="g-4">
+          <Row className="g-1 g-md-4">
             <Col xs={12} md={6}>
               <StatsFlipCard
                 frontTitle="Top instrument this week"
@@ -193,12 +193,12 @@ function DashboardPage() {
 
             <Col xs={12} md={6}>
               <StatsFlipCard
-                frontTitle="Weekly total"
-                backTitle="Weekly total"
+                frontTitle="Total practice on all instruments"
+                backTitle="Total practice"
                 backContent={
                   <h2>
                     {hasPracticedThisWeek
-                      ? formatMinutes(weeklyTotal)
+                      ? formatMinutes(weeklyTotal) + "👏"
                       : "You have not practiced this week 😢"}
                   </h2>
                 }

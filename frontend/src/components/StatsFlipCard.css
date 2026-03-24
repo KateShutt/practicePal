@@ -75,3 +75,21 @@
     margin-top: 0.5rem;
   }
 }
+
+.stats-card .card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.stats-card h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.stats-card p,
+.stats-card li {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
