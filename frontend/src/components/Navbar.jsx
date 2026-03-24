@@ -94,9 +94,15 @@ function Navbar() {
             )}
 
             {token && (
-              <button className="nav-link btn btn-link" onClick={handleLogout}>
-                Logout
-              </button>
+              <div className="nav-item">
+                <button
+                  className="nav-link btn btn-link w-100 text-start"
+                  onClick={handleLogout}
+                  type="button"
+                >
+                  Logout
+                </button>
+              </div>
             )}
           </div>
         </div>
