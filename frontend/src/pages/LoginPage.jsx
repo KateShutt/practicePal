@@ -45,43 +45,47 @@ function LoginPage() {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <main className="page-shell">
+      <section className="page-card">
         <div>
-          <label>Username</label>
-          <input
-            name="username"
-            type="text"
-            placeholder="Enter your username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          ></input>
+          <h1>Login</h1>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Username</label>
+              <input
+                name="username"
+                type="text"
+                placeholder="Enter your username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              ></input>
+            </div>
+
+            <div>
+              <label>Password</label>
+              <input
+                name="password"
+                type={passwordVisibility ? "text" : "password"}
+                placeholder="Enter your password"
+                onChange={handleChange}
+                value={formData.password}
+                required
+              ></input>
+
+              <button type="button" onClick={togglePassword}>
+                {/* need type = button so that it does not default to submit */}
+                {passwordVisibility ? "Hide password" : "Show password"}
+              </button>
+            </div>
+
+            <button type="submit">Login</button>
+          </form>
+
+          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         </div>
-
-        <div>
-          <label>Password</label>
-          <input
-            name="password"
-            type={passwordVisibility ? "text" : "password"}
-            placeholder="Enter your password"
-            onChange={handleChange}
-            value={formData.password}
-            required
-          ></input>
-
-          <button type="button" onClick={togglePassword}>
-            {/* need type = button so that it does not default to submit */}
-            {passwordVisibility ? "Hide password" : "Show password"}
-          </button>
-        </div>
-
-        <button type="submit">Login</button>
-      </form>
-
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-    </div>
+      </section>
+    </main>
   );
 }
 

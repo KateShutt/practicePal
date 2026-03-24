@@ -17,6 +17,9 @@ function AddInstrument() {
 
   const [alreadyPlayed, setAlreadyPlayed] = useState([]);
 
+  const [fetchStatus, setFetchStatus] = useState("checking");
+  // checking / ready / error
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -66,8 +69,11 @@ function AddInstrument() {
       if (instrumentsToDisplay.length > 0) {
         setSelectedInstrument(instrumentsToDisplay[0].id); // set selectedInstrument to be the first of this list
       }
+
+      setFetchStatus("ready");
     } catch (error) {
       console.log(error);
+      setFetchStatus("error");
     }
   }
 
@@ -76,6 +82,7 @@ function AddInstrument() {
   }, []);
 
   function addAnotherInstrument() {
+    setFetchStatus("checking");
     fetchInstruments();
     setModalOpen(false);
   }
@@ -90,56 +97,88 @@ function AddInstrument() {
     setModalOpen(false);
   }
 
+  if (fetchStatus === "checking") {
+    return (
+      <main className="page-shell">
+        <section className="page-card">
+          <h2>Loading...</h2>
+        </section>
+      </main>
+    );
+  }
+
+  if (fetchStatus === "error") {
+    return (
+      <main className="page-shell">
+        <section className="page-card">
+          <h2>Server error</h2>
+        </section>
+      </main>
+    );
+  }
+
   if (instruments.length === 0) {
     return (
-      <div>
-        <h2>You have no more instruments to add!</h2>
-        <button onClick={() => navigate("/dashboard")}>
-          Return to dashboard
-        </button>
-      </div>
+      <main className="page-shell">
+        <section className="page-card">
+          <div>
+            <h2>You have no more instruments to add!</h2>
+            <button onClick={() => navigate("/dashboard")}>
+              Return to dashboard
+            </button>
+          </div>
+        </section>
+      </main>
     );
   }
 
   return (
-    <div>
-      <h1>Add an Instrument</h1>
-      <p>You are already registered to play....</p>
-      <ul>
-        {alreadyPlayed.map((instrument) => (
-          <li key={instrument.id}>{instrument.name}</li>
-        ))}
-      </ul>
-      <form onSubmit={handleSubmit}>
+    <main className="page-shell">
+      <section className="page-card">
         <div>
-          <label>Add an instrument to your list</label>
-          <select
-            onChange={handleChange}
-            name="instrument"
-            value={selectedInstrument || ""} // shows as empty string when component first loads
-          >
-            {instruments.map((instrument) => (
-              <option key={instrument.id} value={instrument.id}>
-                {instrument.name}
-              </option>
+          <h1>Add an Instrument</h1>
+          <p>You are already registered to play....</p>
+          <ul>
+            {alreadyPlayed.map((instrument) => (
+              <li key={instrument.id}>{instrument.name}</li>
             ))}
-          </select>
-        </div>
-        <button type="submit">Add Instrument</button>
-      </form>
-      <Modal
-        isOpen={modalOpen}
-        onRequestClose={() => setModalOpen(false)}
-        contentLabel="Instrument added"
-      >
-        <h2>Instrument successfully added</h2>
-        <p>What would you like to do next?</p>
+          </ul>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Add an instrument to your list</label>
+              <select
+                onChange={handleChange}
+                name="instrument"
+                value={selectedInstrument || ""} // shows as empty string when component first loads
+              >
+                {instruments.map((instrument) => (
+                  <option key={instrument.id} value={instrument.id}>
+                    {instrument.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button type="submit">Add Instrument</button>
+          </form>
+          <Modal
+            isOpen={modalOpen}
+            onRequestClose={() => setModalOpen(false)}
+            contentLabel="Instrument added"
+          >
+            <h2>Instrument successfully added</h2>
+            <p>What would you like to do next?</p>
 
-        <button onClick={addAnotherInstrument}>Add another instrument</button>
-        <button onClick={returnToDashboard}>Return to Dashboard</button>
-        <button onClick={addAPracticeSession}>Add a practice session</button>
-      </Modal>
-    </div>
+            <button onClick={addAnotherInstrument}>
+              Add another instrument
+            </button>
+            <button onClick={returnToDashboard}>Return to Dashboard</button>
+            <button onClick={addAPracticeSession}>
+              Add a practice session
+            </button>
+          </Modal>
+        </div>
+      </section>
+    </main>
   );
 }
 

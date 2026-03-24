@@ -6,3 +6,69 @@
 .no-bullets {
   list-style-type: none;
 }
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+
+  /* warm paper base */
+  background-color: #f2eadc;
+
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 22px,
+    #e3dccb 22px,
+    #e3dccb 23px,
+
+    transparent 23px,
+    transparent 28px,
+    #e3dccb 28px,
+    #e3dccb 29px,
+
+    transparent 29px,
+    transparent 34px,
+    #e3dccb 34px,
+    #e3dccb 35px,
+
+    transparent 35px,
+    transparent 40px,
+    #e3dccb 40px,
+    #e3dccb 41px,
+
+    transparent 41px,
+    transparent 46px,
+    #e3dccb 46px,
+    #e3dccb 47px,
+
+    transparent 47px,
+    transparent 90px
+  );
+}
+
+.page-shell {
+  min-height: 100vh;
+  padding: 32px 16px;
+}
+
+.page-card {
+  max-width: 600px;
+  width: 90%;
+  margin: 0 auto;
+  background: #f9f5ec;
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid #e3dacb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-card {
+  max-width: 1100px;
+  width: 95%;
+  margin: 0 auto;
+  background: #f9f5ec;
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid #e3dacb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}

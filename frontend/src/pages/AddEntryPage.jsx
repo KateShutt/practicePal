@@ -114,118 +114,122 @@ function AddEntryPage() {
   }, []);
 
   return (
-    <div>
-      <h1>Record a practice session</h1>
-      <p>
-        <span style={{ color: "red" }}>*</span>shows required field
-      </p>
-      <form onSubmit={handleSubmit}>
+    <main className="page-shell">
+      <section className="page-card">
         <div>
-          <label className="required">Practice date</label>
-          <input
-            name="practice_date"
-            type="date"
-            placeholder="YYYY-MM-DD"
-            value={formData.practice_date}
-            onChange={handleChange}
-            required
-          ></input>
-        </div>
+          <h1>Record a practice session</h1>
+          <p>
+            <span style={{ color: "red" }}>*</span>shows required field
+          </p>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label className="required">Practice date</label>
+              <input
+                name="practice_date"
+                type="date"
+                placeholder="YYYY-MM-DD"
+                value={formData.practice_date}
+                onChange={handleChange}
+                required
+              ></input>
+            </div>
 
-        <div>
-          <label className="required">Practice duration in minutes</label>
+            <div>
+              <label className="required">Practice duration in minutes</label>
 
-          <input
-            name="duration_minutes"
-            type="number"
-            min="1"
-            step="1"
-            placeholder="enter practice duration"
-            value={formData.duration_minutes}
-            onChange={handleChange}
-            required
-          ></input>
-        </div>
+              <input
+                name="duration_minutes"
+                type="number"
+                min="1"
+                step="1"
+                placeholder="enter practice duration"
+                value={formData.duration_minutes}
+                onChange={handleChange}
+                required
+              ></input>
+            </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          {/* makes text appear next to select */}
-          <label className="required">Practice type</label>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              {/* makes text appear next to select */}
+              <label className="required">Practice type</label>
 
-          <select
-            onChange={handleChange}
-            name="category"
-            value={formData.category}
-            // react select requires a value. Set default in state
-          >
-            <option value="Scales">Scales</option>
-            <option value="Technique">Technique</option>
-            <option value="Sight Reading">Sight Reading</option>
-            <option value="Repertoire">Repertoire</option>
-
-            <option value="Improvisation">Improvisation</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Instrument</label>
-
-          <select
-            onChange={handleChange}
-            name="instrument_id"
-            value={formData.instrument_id || ""}
-          >
-            {userInstruments.map((instrument) => (
-              <option
-                key={instrument.instrument_id}
-                value={instrument.instrument_id}
+              <select
+                onChange={handleChange}
+                name="category"
+                value={formData.category}
+                // react select requires a value. Set default in state
               >
-                {instrument.name}
-              </option>
-            ))}
-          </select>
+                <option value="Scales">Scales</option>
+                <option value="Technique">Technique</option>
+                <option value="Sight Reading">Sight Reading</option>
+                <option value="Repertoire">Repertoire</option>
+
+                <option value="Improvisation">Improvisation</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Instrument</label>
+
+              <select
+                onChange={handleChange}
+                name="instrument_id"
+                value={formData.instrument_id || ""}
+              >
+                {userInstruments.map((instrument) => (
+                  <option
+                    key={instrument.instrument_id}
+                    value={instrument.instrument_id}
+                  >
+                    {instrument.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label>Piece title</label>
+
+              <input
+                name="piece_title"
+                type="text"
+                value={formData.piece_title}
+                onChange={handleChange}
+                placeholder="enter the name of the piece"
+              ></input>
+            </div>
+
+            <div>
+              <label>More info</label>
+
+              <input
+                name="notes"
+                type="text"
+                value={formData.notes}
+                onChange={handleChange}
+                placeholder="worked on bars 1 -50"
+              ></input>
+            </div>
+
+            <button type="submit">Record practice session!</button>
+          </form>
+
+          {errorMessage && <p>{errorMessage}</p>}
+
+          <Modal
+            isOpen={modalOpen}
+            onRequestClose={() => setModalOpen(false)}
+            contentLabel="Practice session added"
+          >
+            <h2>Practice session logged successfully</h2>
+            <p>What would you like to do next?</p>
+
+            <button onClick={addAnotherSession}>Add another session</button>
+            <button onClick={backToDashboard}>Back to Dashboard</button>
+          </Modal>
         </div>
-
-        <div>
-          <label>Piece title</label>
-
-          <input
-            name="piece_title"
-            type="text"
-            value={formData.piece_title}
-            onChange={handleChange}
-            placeholder="enter the name of the piece"
-          ></input>
-        </div>
-
-        <div>
-          <label>More info</label>
-
-          <input
-            name="notes"
-            type="text"
-            value={formData.notes}
-            onChange={handleChange}
-            placeholder="worked on bars 1 -50"
-          ></input>
-        </div>
-
-        <button type="submit">Record practice session!</button>
-      </form>
-
-      {errorMessage && <p>{errorMessage}</p>}
-
-      <Modal
-        isOpen={modalOpen}
-        onRequestClose={() => setModalOpen(false)}
-        contentLabel="Practice session added"
-      >
-        <h2>Practice session logged successfully</h2>
-        <p>What would you like to do next?</p>
-
-        <button onClick={addAnotherSession}>Add another session</button>
-        <button onClick={backToDashboard}>Back to Dashboard</button>
-      </Modal>
-    </div>
+      </section>
+    </main>
   );
 }
 
