@@ -3,6 +3,7 @@ import axios from "axios";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { fetchUserInstruments } from "../services/instrumentFunctions";
+import { handleAuthError } from "../utils/handleAuthError";
 
 function AddInstrument() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ function AddInstrument() {
       console.log("instrument added!");
       setModalOpen(true);
     } catch (error) {
+      if (handleAuthError(error, navigate)) return;
       console.error(error.response?.data);
     }
   }
@@ -72,6 +74,7 @@ function AddInstrument() {
 
       setFetchStatus("ready");
     } catch (error) {
+      if (handleAuthError(error, navigate)) return;
       console.log(error);
       setFetchStatus("error");
     }
@@ -79,7 +82,7 @@ function AddInstrument() {
 
   useEffect(() => {
     fetchInstruments();
-  }, []);
+  }, [navigate, token]);
 
   function addAnotherInstrument() {
     setFetchStatus("checking");
@@ -111,7 +114,7 @@ function AddInstrument() {
     return (
       <main className="page-shell">
         <section className="page-card">
-          <h2>Server error</h2>
+          <h2>Something went wrong. Please try again</h2>
         </section>
       </main>
     );
