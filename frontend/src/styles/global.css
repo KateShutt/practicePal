@@ -250,3 +250,38 @@ body {
   font-size: 0.9rem;
   color: #4a4036;
 }
+
+.entries-list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.entry-card {
+  padding: 12px 14px;
+  border: 1px solid #d8ccba;
+  border-radius: 10px;
+  background: #fffdf8;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.entry-date {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.entry-main {
+  margin: 0 0 6px;
+  color: #6b5b4d;
+}
+
+.entry-sub {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #7a6b5d;
+}
