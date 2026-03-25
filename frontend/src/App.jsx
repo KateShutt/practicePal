@@ -10,10 +10,12 @@ import AddInstrumentPage from "./pages/AddInstrumentPage";
 import "./styles/global.css";
 import Modal from "react-modal";
 import InstrumentRequiredRoute from "./components/InstrumentRequiredRoute";
+import PracticeRequiredRoute from "./components/PracticeRequiredRoute";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProfilePage from "./pages/ProfilePage";
+import PracticeDiary from "./pages/PracticeDiary";
 
 Modal.setAppElement("#root");
 
@@ -102,6 +104,16 @@ function App() {
           element={
             <ProtectedRoute>
               <AddInstrumentPage />
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route
+          path="/practiceDiary"
+          element={
+            <ProtectedRoute>
+              <PracticeRequiredRoute>
+                <PracticeDiary />
+              </PracticeRequiredRoute>
             </ProtectedRoute>
           }
         ></Route>

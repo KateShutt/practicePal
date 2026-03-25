@@ -100,6 +100,12 @@ function Navbar() {
             )}
 
             {token && (
+              <Link className="nav-link" to="/practiceDiary">
+                View Practice
+              </Link>
+            )}
+
+            {token && (
               <div className="nav-item">
                 <button
                   className="nav-link btn btn-link w-100 text-start"

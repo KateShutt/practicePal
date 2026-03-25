@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { formatDateString } from "../services/dateFunctions";
 
 function ProfilePage() {
   const [userInstruments, setUserInstruments] = useState([]);
@@ -13,11 +14,6 @@ function ProfilePage() {
   const [fetchStatus, setFetchStatus] = useState("checking");
 
   //checking / ready / error
-
-  function formatDateString(dateString) {
-    const [year, month, day] = dateString.split("T")[0].split("-");
-    return `${day}-${month}-${year}`;
-  }
 
   useEffect(() => {
     async function loadDashboard() {

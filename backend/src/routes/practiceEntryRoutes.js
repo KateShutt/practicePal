@@ -102,7 +102,7 @@ router.get("/", authMiddleware, async (req, res) => {
 
   try {
     const [entries] = await pool.query(
-      "SELECT * FROM practice_entries WHERE user_id = ? ORDER BY practice_date DESC",
+      "SELECT practice_date, duration_minutes, category, name, piece_title, notes FROM practice_entries JOIN instruments ON practice_entries.instrument_id = instruments.id WHERE practice_entries.user_id = ? ORDER BY practice_date DESC",
       [userId],
     );
 
