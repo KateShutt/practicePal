@@ -75,12 +75,21 @@ function AddEntryPage() {
     const { name, value } = e.target;
 
     if (name === "duration_minutes") {
+      if (value === "") {
+        //allow empty input whilst typing
+        setFormData({ ...formData, [name]: "" });
+        setErrorMessage("");
+        return;
+      }
       const numberValue = Number(value);
+
+      if (!Number.isInteger(numberValue)) {
+        setErrorMessage("practice duration must be a whole number");
+        return;
+      }
+
       if (numberValue <= 0) {
         setErrorMessage("practice duration must be higher than zero");
-        return;
-      } else if (!Number.isInteger(numberValue)) {
-        setErrorMessage("practice duration must be a whole number");
         return;
       }
     }
@@ -134,8 +143,8 @@ function AddEntryPage() {
           <p>
             <span style={{ color: "red" }}>*</span>shows required field
           </p>
-          <form onSubmit={handleSubmit}>
-            <div>
+          <form onSubmit={handleSubmit} className="practice-form">
+            <div className="form-field">
               <label className="required">Practice date</label>
               <input
                 name="practice_date"
@@ -147,7 +156,7 @@ function AddEntryPage() {
               ></input>
             </div>
 
-            <div>
+            <div className="form-field">
               <label className="required">Practice duration in minutes</label>
 
               <input
@@ -162,14 +171,18 @@ function AddEntryPage() {
               ></input>
             </div>
 
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div
+              className="form-field"
+              style={{ display: "flex", alignItems: "center", gap: "10px" }}
+            >
               {/* makes text appear next to select */}
               <label className="required">Practice type</label>
-
+              {/* required must be on the label, not the select */}
               <select
                 onChange={handleChange}
                 name="category"
                 value={formData.category}
+
                 // react select requires a value. Set default in state
               >
                 <option value="Scales">Scales</option>
@@ -181,9 +194,9 @@ function AddEntryPage() {
               </select>
             </div>
 
-            <div>
-              <label>Instrument</label>
-
+            <div className="form-field">
+              <label className="required">Instrument</label>
+              {/* required must be on the label, not the select */}
               <select
                 onChange={handleChange}
                 name="instrument_id"
@@ -200,7 +213,7 @@ function AddEntryPage() {
               </select>
             </div>
 
-            <div>
+            <div className="form-field">
               <label>Piece title</label>
 
               <input
@@ -208,26 +221,28 @@ function AddEntryPage() {
                 type="text"
                 value={formData.piece_title}
                 onChange={handleChange}
-                placeholder="enter the name of the piece"
+                placeholder="enter piece-title"
               ></input>
             </div>
 
-            <div>
+            <div className="form-field">
               <label>More info</label>
 
-              <input
+              <textarea
                 name="notes"
                 type="text"
                 value={formData.notes}
                 onChange={handleChange}
-                placeholder="worked on bars 1 -50"
-              ></input>
+                placeholder="worked on..."
+              ></textarea>
             </div>
 
-            <button type="submit">Record practice session!</button>
+            <button type="submit" className="primary-button">
+              Record practice session
+            </button>
           </form>
 
-          {errorMessage && <p>{errorMessage}</p>}
+          {errorMessage && <p className="form-error">{errorMessage}</p>}
 
           <Modal
             isOpen={modalOpen}

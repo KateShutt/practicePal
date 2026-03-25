@@ -11,10 +11,13 @@ function RegisterPage() {
 
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrorMessage("");
   }
 
   function togglePassword() {
@@ -26,20 +29,24 @@ function RegisterPage() {
 
     if (formData.password.length < 10) {
       console.log("password must be at least 10 characters long");
+      setErrorMessage("password must be at least 10 characters long");
       return;
     }
 
     if (!/[A-Z]/.test(formData.password)) {
       console.log("password must contain at least one upper case letter");
+      setErrorMessage("password must contain at least one upper case letter");
       return;
     }
 
     if (!/[0-9]/.test(formData.password)) {
       console.log("password must contain at least one number");
+      setErrorMessage("password must contain at least one number");
       return;
     }
     if (formData.password !== formData.confirmPassword) {
       console.log("passwords do not match");
+      setErrorMessage("passwords do not match");
       return;
     }
 
@@ -63,8 +70,8 @@ function RegisterPage() {
       <section className="page-card">
         <div>
           <h1>Register</h1>
-          <form onSubmit={handleSubmit}>
-            <div>
+          <form onSubmit={handleSubmit} className="register-form">
+            <div className="form-field">
               <label>Username</label>
               <input
                 name="username"
@@ -76,7 +83,7 @@ function RegisterPage() {
               ></input>
             </div>
 
-            <div>
+            <div className="form-field">
               <label>Password</label>
               <input
                 name="password"
@@ -87,19 +94,42 @@ function RegisterPage() {
                 required
               ></input>
 
-              <button type="button" onClick={togglePassword}>
+              <button
+                type="button"
+                onClick={togglePassword}
+                className="password-toggle"
+              >
                 {passwordVisibility ? "Hide password" : "Show password"}
               </button>
 
-              <p>Password must contain:</p>
-              <ul>
-                <li>At least 10 characters</li>
-                <li>One uppercase letter</li>
-                <li>One number</li>
-              </ul>
+              {formData.password && (
+                <ul className="password-rules no-bullets">
+                  <li
+                    className={
+                      formData.password.length >= 10 ? "valid" : "invalid"
+                    }
+                  >
+                    At least 10 characters
+                  </li>
+                  <li
+                    className={
+                      /[A-Z]/.test(formData.password) ? "valid" : "invalid"
+                    }
+                  >
+                    One uppercase letter
+                  </li>
+                  <li
+                    className={
+                      /[0-9]/.test(formData.password) ? "valid" : "invalid"
+                    }
+                  >
+                    One number
+                  </li>
+                </ul>
+              )}
             </div>
 
-            <div>
+            <div className="form-field">
               <label>Confirm password</label>
               <input
                 name="confirmPassword"
@@ -111,9 +141,13 @@ function RegisterPage() {
               ></input>
             </div>
 
-            <button type="submit">Register</button>
+            <button type="submit" className="primary-button">
+              Register
+            </button>
           </form>
         </div>
+
+        {errorMessage && <p className="form-error">{errorMessage}</p>}
       </section>
     </main>
   );
