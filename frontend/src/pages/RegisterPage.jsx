@@ -17,6 +17,7 @@ function RegisterPage() {
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrorMessage("");
   }
 
   function togglePassword() {
