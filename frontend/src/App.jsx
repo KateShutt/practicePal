@@ -13,6 +13,7 @@ import InstrumentRequiredRoute from "./components/InstrumentRequiredRoute";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ProfilePage from "./pages/ProfilePage";
 
 Modal.setAppElement("#root");
 
@@ -70,6 +71,14 @@ function App() {
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage></ProfilePage>
+            </ProtectedRoute>
+          }
+        ></Route>
         <Route
           path="/dashboard"
           element={

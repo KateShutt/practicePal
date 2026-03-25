@@ -216,3 +216,37 @@ body {
 .password-rules .invalid {
   color: #b23b3b;
 }
+
+.profile-name {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #3a3128;
+}
+
+.profile-date {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #6b5b4d;
+}
+
+.page-card h2 {
+  margin-bottom: 8px;
+}
+
+.instrument-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin-top: 8px;
+}
+
+.instrument-pill {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #fffdf8;
+  border: 1px solid #d8ccba;
+  font-size: 0.9rem;
+  color: #4a4036;
+}

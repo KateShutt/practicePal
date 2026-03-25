@@ -76,6 +76,12 @@ function Navbar() {
             )}
 
             {token && (
+              <Link className="nav-link" to="/profile">
+                Profile
+              </Link>
+            )}
+
+            {token && (
               <Link className="nav-link" to="/dashboard">
                 Dashboard
               </Link>
