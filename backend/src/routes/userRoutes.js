@@ -25,4 +25,24 @@ router.get("/profile", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/profile/createdOn", authMiddleware, async (req, res) => {
+  const userId = req.user.userId;
+
+  try {
+    const [users] = await pool.query(
+      "SELECT created_at FROM users WHERE id = ?",
+      [userId],
+    );
+
+    if (users.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.json(users[0]);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Server error" });
+  }
+});
+
 export default router;
