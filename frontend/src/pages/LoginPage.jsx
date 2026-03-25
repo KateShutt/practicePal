@@ -49,8 +49,8 @@ function LoginPage() {
       <section className="page-card">
         <div>
           <h1>Login</h1>
-          <form onSubmit={handleSubmit}>
-            <div>
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="form-field">
               <label>Username</label>
               <input
                 name="username"
@@ -62,7 +62,7 @@ function LoginPage() {
               ></input>
             </div>
 
-            <div>
+            <div className="form-field">
               <label>Password</label>
               <input
                 name="password"
@@ -73,16 +73,22 @@ function LoginPage() {
                 required
               ></input>
 
-              <button type="button" onClick={togglePassword}>
+              <button
+                type="button"
+                onClick={togglePassword}
+                className="password-toggle"
+              >
                 {/* need type = button so that it does not default to submit */}
                 {passwordVisibility ? "Hide password" : "Show password"}
               </button>
             </div>
 
-            <button type="submit">Login</button>
+            <button type="submit" className="primary-button">
+              Login
+            </button>
           </form>
 
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+          {errorMessage && <p className="form-error">{errorMessage}</p>}
         </div>
       </section>
     </main>

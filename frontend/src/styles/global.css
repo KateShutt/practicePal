@@ -74,7 +74,10 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
-.practice-form {
+.practice-form,
+.instrument-form,
+.login-form,
+.register-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -172,4 +175,44 @@ body {
   color: #9f2d2d;
   border: 1px solid #f2b8b8;
   font-weight: 500;
+}
+
+.password-toggle {
+  margin-top: 6px;
+  align-self: flex-start;
+  /* don't stretch to full width, sit at left */
+
+  background: none;
+  border: none;
+  padding: 0;
+
+  font-size: 0.9rem;
+  color: #6f4e37;
+  cursor: pointer;
+
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: #5c402d;
+}
+
+.password-rules {
+  margin: 6px 0 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: #6b5b4d;
+}
+
+.password-rules li {
+  margin-top: 4px;
+}
+
+.password-rules .valid {
+  color: #2e7d32;
+}
+
+.password-rules .invalid {
+  color: #b23b3b;
 }

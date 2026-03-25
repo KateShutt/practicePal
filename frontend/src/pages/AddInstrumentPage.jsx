@@ -126,7 +126,10 @@ function AddInstrument() {
         <section className="page-card">
           <div>
             <h2>You have no more instruments to add!</h2>
-            <button onClick={() => navigate("/dashboard")}>
+            <button
+              className="primary-button"
+              onClick={() => navigate("/dashboard")}
+            >
               Return to dashboard
             </button>
           </div>
@@ -142,8 +145,8 @@ function AddInstrument() {
           <h1>Add an Instrument</h1>
           {alreadyPlayed.length > 0 && (
             <>
-              <p>You are already registered to play....</p>
-              <ul>
+              <p>You are already registered to play:</p>
+              <ul className="no-bullets">
                 {alreadyPlayed.map((instrument) => (
                   <li key={instrument.id}>{instrument.name}</li>
                 ))}
@@ -151,13 +154,14 @@ function AddInstrument() {
             </>
           )}
 
-          <form onSubmit={handleSubmit}>
-            <div>
+          <form onSubmit={handleSubmit} className="instrument-form">
+            <div className="form-field">
               <label>Add an instrument to your list</label>
               <select
                 onChange={handleChange}
                 name="instrument"
                 value={selectedInstrument || ""} // shows as empty string when component first loads
+                required
               >
                 {instruments.map((instrument) => (
                   <option key={instrument.id} value={instrument.id}>
@@ -166,7 +170,9 @@ function AddInstrument() {
                 ))}
               </select>
             </div>
-            <button type="submit">Add Instrument</button>
+            <button type="submit" className="primary-button">
+              Add Instrument
+            </button>
           </form>
           <Modal
             isOpen={modalOpen}
