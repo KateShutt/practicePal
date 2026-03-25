@@ -3,6 +3,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { userHasInstruments } from "../services/instrumentFunctions";
 import { useEffect, useState } from "react";
 
+import axios from "axios";
+
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -10,6 +12,8 @@ function Navbar() {
   const token = localStorage.getItem("token");
 
   const [hasInstrument, setHasInstrument] = useState(false);
+
+  const [userHasPracticed, setUserHasPracticed] = useState(false);
 
   useEffect(() => {
     async function checkInstruments() {
@@ -28,6 +32,32 @@ function Navbar() {
     }
 
     checkInstruments();
+  }, [token, location.pathname]);
+
+  useEffect(() => {
+    async function checkPractice() {
+      if (!token) {
+        setUserHasPracticed(false);
+        return;
+      }
+      try {
+        const result = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/practice-entries`,
+          { headers: { Authorization: `Bearer ${token}` } },
+        );
+
+        if (result.data.entries.length > 0) {
+          setUserHasPracticed(true);
+        } else {
+          setUserHasPracticed(false);
+        }
+      } catch (error) {
+        console.error(error);
+        setUserHasPracticed(false);
+      }
+    }
+
+    checkPractice();
   }, [token, location.pathname]);
 
   function handleLogout() {
@@ -99,7 +129,7 @@ function Navbar() {
               </Link>
             )}
 
-            {token && (
+            {token && userHasPracticed && (
               <Link className="nav-link" to="/practiceDiary">
                 View Practice
               </Link>
