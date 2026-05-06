@@ -1,7 +1,5 @@
 # 🎶 PracticePal
 
-## App in development! Functionality is there, but styling still to be applied!
-
 PracticePal is a full-stack web application that helps musicians track their practice sessions, manage instruments, and monitor progress over time.
 
 The app allows users to register, log in securely, add instruments, and log structured practice entries including duration, category, and date.
@@ -11,7 +9,15 @@ This project demonstrates a complete production-ready setup with a deployed fron
 ## 🌍 Live Demo
 
 Frontend: https://practice-pal-sooty.vercel.app <br>
+
 Backend API: https://practicepal-85r6.onrender.com/api/health
+
+> Note: The backend is hosted on Render free tier, so the first request may take a while to wake up
+
+### Demo account
+
+Username: `test`
+Password: `Test123456`
 
 ## 🛠️ Tech Stack
 
