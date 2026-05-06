@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
 
 import { handleAuthError } from "../utils/handleAuthError";
+
+import PracticeEntryModal from "../components/PracticeEntryModal";
 
 function AddEntryPage() {
   const navigate = useNavigate();
@@ -244,17 +245,12 @@ function AddEntryPage() {
 
           {errorMessage && <p className="form-error">{errorMessage}</p>}
 
-          <Modal
+          <PracticeEntryModal
             isOpen={modalOpen}
-            onRequestClose={() => setModalOpen(false)}
-            contentLabel="Practice session added"
-          >
-            <h2>Practice session logged successfully</h2>
-            <p>What would you like to do next?</p>
-
-            <button onClick={addAnotherSession}>Add another session</button>
-            <button onClick={backToDashboard}>Back to Dashboard</button>
-          </Modal>
+            onClose={() => setModalOpen(false)}
+            addAnotherSession={addAnotherSession}
+            backToDashboard={backToDashboard}
+          ></PracticeEntryModal>
         </div>
       </section>
     </main>
